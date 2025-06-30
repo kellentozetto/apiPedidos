@@ -1,4 +1,4 @@
-package br.com.cotiinformatica;
+package br.com.cotiinformatica.domain.services;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
