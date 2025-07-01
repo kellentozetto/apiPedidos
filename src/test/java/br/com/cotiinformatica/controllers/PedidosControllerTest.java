@@ -110,16 +110,18 @@ public class PedidosControllerTest {
 	
 	@Test
 	@Order(4)
-	@DisplayName("Deve executar PUT /api/v1/pedidos com dados inválidos (400).")
+	@DisplayName("Deve executar PUT /api/v1/pedidos	com dados inválidos (400).")
 	void testPutPedido_DadosInvalidos() throws Exception {
 		//Arrange
 		var request = new PedidoRequest();
-		
 		//Act / Assertions
-		mockMvc.perform(put("/api/v1/pedidos/{id}", UUID.randomUUID().toString())
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(request)))
-		.andExpect(status().isBadRequest());
+		mockMvc.perform(put("/api/v1/pedidos/{id}",
+					UUID.randomUUID().toString())
+					.contentType(MediaType.APPLICATION_JSON)
+						.content
+							(objectMapper.writeValueAsString(request)))
+			.andExpect(status().isBadRequest());
+		
 	}
 	
 	@Test
