@@ -1,5 +1,7 @@
 package br.com.cotiinformatica.controllers;
+
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,22 +17,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.com.cotiinformatica.domain.dtos.requests.PedidoRequest;
 import br.com.cotiinformatica.domain.dtos.responses.PedidoResponse;
 import br.com.cotiinformatica.domain.interfaces.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/pedidos")
 @Tag(
-		name = "Controle de pedidos",
+		name = "Controle de pedidos", 
 		description = "Serviços para gerenciamento de solicitações de pedidos."
 )
 public class PedidosController {
 	
 	@Autowired
 	private PedidoService pedidoService;
+
 	@Operation(
 		summary = "Cadastro de solicitação de pedido.",
 		description = "Cria uma nova solicitação de pedido no sistema."
@@ -40,15 +45,17 @@ public class PedidosController {
 		var response = pedidoService.criar(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
+
 	@Operation(
 		summary = "Alteração de solicitação de pedido.",
 		description = "Modifica uma solicitação de pedido já existente no sistema."
 	)
 	@PutMapping("{id}")
-	public ResponseEntity<PedidoResponse> put(@PathVariable UUID id, @RequestBody PedidoRequest request) {
+	public ResponseEntity<PedidoResponse> put(@PathVariable UUID id, @RequestBody @Valid PedidoRequest request) {
 		var response = pedidoService.alterar(id, request);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+
 	@Operation(
 		summary = "Exclusão de solicitação de pedido.",
 		description = "Remove uma solicitação de pedido já no sistema."
@@ -58,6 +65,7 @@ public class PedidosController {
 		var response = pedidoService.excluir(id);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+
 	@Operation(
 		summary = "Consulta de solicitações de pedido.",
 		description = "Retorna uma lista contendo solicitações de pedidos cadastrados no sistema."
@@ -84,6 +92,12 @@ public class PedidosController {
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }
+
+
+
+
+
+
 
 
 
